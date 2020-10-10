@@ -9,11 +9,11 @@ example:
 import numpy as np
 from sklearn.neighbors import KernelDensity
 
-a = np.array([10,11,9,23,21,11,45,20,11,12]).reshape(-1, 1)
+x = np.array([10,11,9,23,21,11,45,20,11,12]).reshape(-1, 1)
 kde = KernelDensity(kernel='gaussian', bandwidth=3)
-kde = split_kde(a, start_end=(0,100))
+kde = split_kde(x, start_end=(0,100))
 
-print(a)
+print(x)
 print(kde.splitted_)
 print(kde.labels_)
 ```
@@ -40,4 +40,11 @@ plot:
 ```python
 from matplotlib.pyplot import plot
 plot(kde.s_, kde.e_)
+```
+
+to force predifined number of groups (auto search bandwidth size), use `n_groups`:
+
+```
+kde = KernelDensity(kernel='gaussian', bandwidth=3)
+kde = split_kde(x, model = kde, n_groups = 4, max_iter=1000)
 ```
