@@ -29,9 +29,8 @@ def split_kde(x, model=None, start_end=None, n_groups=None, lower_bound=None, up
     if n_groups:
         # binary_search
         lower_bound = 0
-        iter = 0
+        iteration = 0
         while len(mi) != (n_groups-1):
-            print(model.bandwidth, model.s_[mi])
             if len(mi) > (n_groups-1):
                 # increase kernel
                 lower_bound = model.bandwidth
@@ -46,8 +45,8 @@ def split_kde(x, model=None, start_end=None, n_groups=None, lower_bound=None, up
             model.fit(x)
             model.e_ = model.score_samples(model.s_.reshape(-1,1))
             mi = argrelextrema(model.e_, np.less)[0]
-            iter += 1
-            if iter == max_iter:
+            iteration += 1
+            if iteration == max_iter:
                 raise Exception('No convergence. Try remove start_end or reduce the difference, or increase max_iter')
     
     model.split_points_ = model.s_[mi]    
