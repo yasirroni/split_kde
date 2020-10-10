@@ -64,10 +64,10 @@ def get_split_points_(e, s):
     return s[mi]
 
 def get_splitted_(x, split_points_):
-    splitted_ = [x[x < split_points_[0]]]
+    splitted_ = [x[x <= split_points_[0]]]
     for idx in range(len(split_points_))[:-1]:
-        splitted_.append(x[(x >= split_points_[idx]) * (x < split_points_[idx+1])])  
-    splitted_.append(x[x >= split_points_[-1]])
+        splitted_.append(x[(x > split_points_[idx]) * (x <= split_points_[idx+1])])  
+    splitted_.append(x[x > split_points_[-1]])
     return splitted_
 
 def get_labels_(x, split_points_):
